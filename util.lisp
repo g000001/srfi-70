@@ -5,8 +5,30 @@
       (symbol-value '+eof+)
       (list nil)))
 
+(defmacro defsynonymfun (name fcn)
+  `(setf (fdefinition ',name) ,fcn))
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (progn
+    (defsynonymfun = #'cl:=)
+    (defsynonymfun < #'cl:<)
+    (defsynonymfun > #'cl:>)
+    (defsynonymfun <= #'cl:<=)
+    (defsynonymfun >= #'cl:>=)
+    (defsynonymfun exp  #'cl:exp)
+    (defsynonymfun log  #'cl:log)
+    (defsynonymfun sin  #'cl:sin)
+    (defsynonymfun cos  #'cl:cos)
+    (defsynonymfun tan  #'cl:tan)
+    (defsynonymfun asin #'cl:asin)
+    (defsynonymfun acos #'cl:acos)
+    (defsynonymfun atan #'cl:atan)
+    (defsynonymfun sqrt #'cl:sqrt)
+    (defsynonymfun angle #'cl:phase)
+    (defsynonymfun magnitude #'cl:abs)
+    (defsynonymfun make-rectangular #'cl:complex)
+    (defsynonymfun numerator #'cl:numerator)
+    (defsynonymfun denominator #'cl:denominator)
     (setf (fdefinition 'abs) #'cl:abs)
     (setf (fdefinition 'eq?) #'cl:eq)
     (setf (fdefinition 'negative?) #'cl:minusp)
@@ -20,7 +42,6 @@
     (setf (fdefinition 'even?) #'cl:evenp)
     (setf (fdefinition 'newline) #'cl:terpri)
     (setf (fdefinition 'display) #'cl:princ)
-    (setf (fdefinition 'remainder)  #'cl:rem)
     (setf (fdefinition 'string-length)  #'cl:length)
     (setf (fdefinition 'char->integer)  #'cl:char-code)
     (setf (fdefinition 'string-ref) #'cl:char)
@@ -43,6 +64,9 @@
     (setf (fdefinition 'real?) #'cl:realp)
     (setf (fdefinition 'exists) #'cl:some)
     ))
+
+(defun make-polar (r th)
+  (* r (cis th)))
 
 (defun integer? (n)
   (or (zerop n)
@@ -116,9 +140,6 @@
 (defun set-cdr! (cons x)
   (cl:rplacd cons x))
 
-(defun quotient (x y)
-  (values (cl:truncate x y)))
-
 (defun list-tail (list k)
   (cl:nthcdr k list))
 
@@ -185,10 +206,6 @@
 (defun vector-ref (vec k)
   (cl:svref vec k))
 
-(declaim (inline modulo))
-(defun modulo (x y)
-  (cl:mod x y))
-
 (defmacro begin (&body body)
   `(progn ,@body))
 
@@ -202,10 +219,6 @@
 (declaim (inline string-append))
 (defun string-append (&rest strings)
   (cl:format nil "~{~A~}" strings))
-
-(declaim (inline number->string))
-(defun number->string (num)
-  (cl:write-to-string num))
 
 (defmacro dolex ((&rest varlist) endlist &body body)
   (let* ((vars (cl:mapcar (lambda (v)

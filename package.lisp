@@ -13,7 +13,46 @@
            :real?
            :rational?
            :integer?
+           :exact?
+           :inexact?
            :/
+           :=
+           :<
+           :>
+           :<=
+           :>=
+           :+
+           :*
+           :-
+           :quotient
+           :remainder
+           :modulo
+           :floor
+           :ceiling
+           :truncate
+           :round
+           :exp
+           :log
+           :sin
+           :cos
+           :tan
+           :asin
+           :acos
+           :atan
+           :sqrt
+           :expt
+           :make-rectangular
+           :make-polar
+           :real-part
+           :imag-part
+           :magnitude
+           :angle
+           :exact->inexact
+           :inexact->exact
+           :number->string
+           :string->number
+           :numerator
+           :denominator
            ))
 
 (defpackage :srfi-70.internal
@@ -21,4 +60,36 @@
   (:shadow :lambda :member :map :assoc)
   (:shadowing-import-from :srfi-70 :lcm :gcd :expt
                           :rationalize :max :min :abs
-                          :gcd :lcm :/))
+                          :gcd :lcm
+                          :/
+                          :=
+                          :<
+                          :>
+                          :<=
+                          :>=
+                          :+
+                          :*
+                          :-
+                          :floor
+                          :ceiling
+                          :truncate
+                          :round
+                          :exp
+                          :log
+                          :sin
+                          :cos
+                          :tan
+                          :asin
+                          :acos
+                          :atan
+                          :atan
+                          :sqrt
+                          :expt
+                          :numerator
+                          :denominator
+                          ))
+
+
+;;
+
+; (g1::delete-package* :srfi-70)
