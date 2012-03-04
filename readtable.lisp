@@ -40,6 +40,12 @@
             n
             (/ n (expt 10. (- len pos))) )))))
 
+(defun |#i-reader| (stream subchar arg)
+  (declare (ignore subchar arg))
+  (let ((n (read stream t nil t)))
+    (if (floatp n)
+	n
+	(float n 0d0))))
 
 (defun cl-read (&optional (stream *standard-input*)
                           eof-error-p
@@ -83,4 +89,5 @@
   (:macro-char #\+ #'+-reader t)
   (:macro-char #\- #'+-reader t)
   (:dispatch-macro-char #\# #\e #'|#e-reader|)
+  (:dispatch-macro-char #\# #\i #'|#i-reader|)
   (:case :upcase))
