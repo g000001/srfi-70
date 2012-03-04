@@ -142,7 +142,9 @@
 
 (declaim (inline number->string))
 (defun number->string (num &optional (radix 10.))
-  (cl:write-to-string num :base radix))
+  (cond ((= +inf.0 num) "+inf.0")
+        ((= -inf.0 num) "-inf.0")
+        (T (cl:write-to-string num :base radix))))
 
 (defun string->number (str &optional (radix 10.))
   ;;>> TODO (string->number "15##")                ==>  1500.0
