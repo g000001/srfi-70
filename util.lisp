@@ -10,6 +10,7 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (progn
+    (defsynonymfun odd? #'cl:oddp)
     (defsynonymfun = #'cl:=)
     (defsynonymfun < #'cl:<)
     (defsynonymfun > #'cl:>)
