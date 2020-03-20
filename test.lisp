@@ -1,18 +1,15 @@
-(cl:in-package :srfi-70.internal)
+(cl:in-package "https://github.com/g000001/srfi-70#internals")
 (in-readtable :srfi-70)
 
-(def-suite srfi-70)
+(def-suite* srfi-70)
 
-(in-suite srfi-70)
-
-;;; ???
-(defconstant |+INF.0| +inf.0)
-(defconstant |-INF.0| -inf.0)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (defun nanp (obj)
     #+sbcl (sb-ext:float-nan-p obj)
-    #-sbcl (not-implemented obj)))
+    #+lispworks (sys::nan-p obj)
+    #-(or sbcl lispworks) (not-implemented obj)))
+
 
 (defmacro ==> (&body body)
   `(progn
@@ -287,3 +284,6 @@
     ;;>> TODO (string->number "15##")                ==>  1500.0
     #.(string->number "+inf.0")              ==>  +inf.0
     #.(string->number "-inf.0")              ==>  -inf.0))
+
+
+;; *EOF*

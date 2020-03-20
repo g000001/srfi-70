@@ -1,4 +1,5 @@
-* SRFI 70: Numbers
+# SRFI 70 for CL: Numbers
+
 - Copyright (C) Aubrey Jaffer 2005. All Rights Reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining

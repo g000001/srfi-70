@@ -1,4 +1,4 @@
-(cl:in-package :srfi-70.internal)
+(cl:in-package "https://github.com/g000001/srfi-70#internals")
 
 (defconstant +eof+
   (if (boundp '+eof+)
@@ -62,7 +62,6 @@
     (setf (fdefinition 'char-ci<?) #'cl:char-lessp)
     (setf (fdefinition 'string<?) #'cl:string<)
     (setf (fdefinition 'string-ci<?) #'cl:string-lessp)
-    (setf (fdefinition 'real?) #'cl:realp)
     (setf (fdefinition 'exists) #'cl:some)
     ))
 
